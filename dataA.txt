@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [[ $x == *".txt" ]]
+then
+	
+fi
+
+Arr=()
+while IFS=  read -r -d line $'\0' #this finds all the text files 
+do
+    Arr+=("$line")
+done < <(find . -name "*.txt" -print0) #need to make sure i input the right path
+
+for i in "${Arr[@]}" 	#this opens each file from the array
+do
+	var=$(cat $i)	#i is full path of the text file
+	
+	found=0	
+	while IFS= read -r line
+		if [[ "$line" == "https*" ]] 
+		then
+			#$line is a website, do something with the website			
+			site=$line
+			found=1
+		fi
+	done < ($var || found=1)
+	
+	#clone the site
+	if [  ] 
+	then
+		echo "$site: Cloning OK"
+	else
+		>&2 echo "$site: Cloning FAILED"
+	fi
+	
+done
+
+
+#maybe "find" will help me in this one
